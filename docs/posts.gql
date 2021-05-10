@@ -1,0 +1,99 @@
+query GET_ALL_POSTS {
+  getAllPosts {
+    id
+    title
+    content
+    createdAt
+    featureImage
+    updatedAt
+  }
+}
+
+query POST_BY_ID($id: ID!) {
+  getPostById(id: $id) {
+    id
+    title
+    content
+    createdAt
+    featureImage
+    updatedAt
+  }
+}
+
+mutation CREATE_NEW_POST(
+  $title: String!
+  $content: String!
+  $featureImage: String
+) {
+  createNewPost(
+    newPost: { title: $title, content: $content, featureImage: $featureImage }
+  ) {
+    title
+    content
+    featureImage
+  }
+}
+
+mutation EDIT_POST_BY_ID($id: ID!, $updatedPost: PostInput!) {
+  editPostByID(updatedPost: $updatedPost, id: $id) {
+    id
+    title
+    content
+    featureImage
+  }
+}
+
+mutation DELETE_POST_BY_ID($id: ID!) {
+  deletePostById(id: $id) {
+    id
+    message
+    success
+  }
+}
+
+mutation REGISTER_NEW_USER {
+  registerUser(
+    newUser: {
+      username: "Chala Chube12"
+      firstName: "Chala"
+      lastName: "Chube"
+      email: "test12@hotmail.com"
+      password: "test123"
+      avatarImage: "https://cdn3.iconfinder.com/data/icons/avatar-95/500/Avatar-21-512.png"
+    }
+  ) {
+    token
+    user {
+      id
+      username
+      email
+      firstName
+      lastName
+      avatarImage
+    }
+  }
+}
+
+query AUTHENTICATE_USER {
+  authenticateUser(username: "Chala Chube12", password: "test123") {
+    user {
+      id
+      username
+      firstName
+      lastName
+      email
+      avatarImage
+    }
+    token
+  }
+}
+
+//for fire camp
+
+mutation UP($featureImage: Upload) {
+  createNewPost(newPost: {title: "sdhsdhsdghg", content: "sdsd dfgd fsg dfgsfd", featureImage: $featureImage}) {
+    title
+    content
+    featureImage
+  }
+}
